@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <!-- <meta charset="UTF-8" /> -->
+  <title> Signup</title>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="/js/main.js"></script>
+</head>
+<body>
+
+  <% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+  <% } %>
+
+  <!-- Signup Form -->
+  <div id="signupForm" class="signup-form" >
+    <input type="text" id="signupName" placeholder="Name" />
+    <input type="email" id="signupEmail" placeholder="Email" />
+    <input type="password" id="signupPassword" placeholder="Password" />
+    <button onclick="SignupButton()">Sign Up</button>
+  </div>
+
+  <!-- Toggle Link -->
+  <p>
+    Don’t have an account? <a  href="/login" >Login</a>
+  </p>
+
+</body>
+</html>

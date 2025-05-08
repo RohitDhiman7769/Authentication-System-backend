@@ -4,13 +4,18 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
+/**
+ * 
+ * @param {*} data get user sign up data and store into database
+ * @param {*} callback sent error and result data into call back 
+ */
 export const registerUserData = async (data, callback) => {
+    console.log('**************',data)
   const { username, userEmail, userPassword } = data;
 
   try {
     db.query('SELECT * FROM users WHERE user_email = ? OR user_name = ?',[userEmail, username],async (err, results) => {
         if (err) return callback(err);
-// 
         if (results.length > 0) {
           return callback(null, { status:200, message: 'User already registered' });
         }
@@ -24,7 +29,7 @@ export const registerUserData = async (data, callback) => {
           [username, userEmail, hashedPassword, createdAt],
           (err, result) => {
             if (err) return callback(err);
-            callback(null, { status: 200, userId: result.insertId, message: 'User registered successfully'  });
+            callback(null, { status: 200, userId: result.insertId, message: 'User registered successfully',redirectTo: '/login'  });
           }
         );
       }
@@ -35,50 +40,3 @@ export const registerUserData = async (data, callback) => {
 };
 
 
-
-export const userLoginData = async (data, callback) => {
-    const { username, userPassword } = data;
-  
-    try {
-      db.query(
-        'SELECT * FROM users WHERE user_email = ? OR user_name = ?',
-        [username, username],
-        async (err, results) => {
-          if (err) return callback(err);
-  
-          if (results.length === 0) {
-            return callback(null, { status: 401, message: 'User not found' });
-          }
-  
-          const user = results[0];
-  
-          // Compare password
-          const isMatch = await bcrypt.compare(userPassword,user.password);
-          if (!isMatch) {
-            return callback(null, { status: 401, message: 'Incorrect password' });
-          }
-  
-          // Generate JWT token
-          const token = jwt.sign(
-            { id: user.id, email: user.user_email, name: user.user_name },
-            process.env.JWT_SECRET,
-            { expiresIn: '1h' }
-          );
-  
-          callback(null, {
-            status: 200,
-            message: 'Login successful',
-            token,
-            user: {
-              id: user.id,
-              name: user.user_name,
-              email: user.user_email,
-              created_at: user.created_at,
-            }
-          });
-        }
-      );
-    } catch (error) {
-      callback(error);
-    }
-  };

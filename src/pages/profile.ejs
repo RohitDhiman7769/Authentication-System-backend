@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8" />
+  <title>User Profile</title>
+  <script src="/js/main.js"></script>
+<!-- </head> -->
+<body>
+
+  <div id="userData">
+    <ul id="userInfo">
+      <li><span>Id: <span id="userId"><%= user.id %></span></span></li>
+      <li><span>Name: <span id="userName"><%= user.name %></span></span></li>
+      <li><span>Email: <span id="userEmail"><%= user.email %></span></span></li>
+      <li><span>Created At: <span id="userCreatedAt"><%= user.created_at %></span></span></li>
+    </ul>
+    <button onclick="logOutBtn()">Logout</button>
+  </div>
+
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Profile</title>
+</head>
+<body>
+  <h1>Welcome, <%= user.name %>!</h1>
+  <p>Email: <%= user.email %></p>
+  <p>Created At: <%= user.created_at %></p>
+  <a href="/log-out">Logout</a>
+</body>
+</html> -->
+

@@ -1,0 +1,38 @@
+.form-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  /* #loginForm{
+    background-color: red;
+  } */
+  .form-toggle button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .form-toggle .active {
+    background-color: grey;
+    color: white;
+  }
+
+  .login-page {
+    width: 300px;
+    margin: auto;
+  }
+
+  .login-page {}
+
+  .form input {
+    width: 93%;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+
+  .form button {
+    width: 100%;
+    padding: 10px;
+  }
